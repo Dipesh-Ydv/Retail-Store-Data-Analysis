@@ -1,0 +1,536 @@
+﻿StoreID,seller_city,seller_state,Region
+ST101,Alwal,Andhra Pradesh,South
+ST102,Badepalle,Andhra Pradesh,South
+ST103,Akkarampalle,Andhra Pradesh,South
+ST104,Koratla,Andhra Pradesh,South
+ST105,Vitthal Udyognagar INA,Gujarat,West
+ST106,Anakapalle,Andhra Pradesh,South
+ST107,Gaurella,Chhattisgarh,North
+ST108,Peralasseri,Kerala,South
+ST109,Kandla,Gujarat,West
+ST110,Sarkhej-Okaf,Gujarat,West
+ST111,Konnur,Karnataka,South
+ST112,Eddumailaram,Andhra Pradesh,South
+ST113,Dharamjaigarh,Chhattisgarh,North
+ST114,Machilipatnam,Andhra Pradesh,South
+ST115,Gho Manhasan,Jammu & Kashmir,North
+ST116,Farooqnagar,Andhra Pradesh,South
+ST117,Kosamba,Gujarat,West
+ST118,Anantapur,Andhra Pradesh,South
+ST119,Renigunta,Andhra Pradesh,South
+ST120,Adoni,Andhra Pradesh,South
+ST121,Bawani Khera,Haryana,North
+ST122,Harpanahalli,Karnataka,South
+ST123,Barshi,Maharashtra,West
+ST124,Mancherial,Andhra Pradesh,South
+ST125,Bestavaripeta,Andhra Pradesh,South
+ST126,Chunchupalle,Andhra Pradesh,South
+ST127,Daitari,Orissa,East
+ST128,Chinnachowk,Andhra Pradesh,South
+ST129,Bellampalle,Andhra Pradesh,South
+ST130,Eluru,Andhra Pradesh,South
+ST131,Pudupalayam,Tamil Nadu,South
+ST132,Bheemavaram,Andhra Pradesh,South
+ST133,Nagari,Andhra Pradesh,South
+ST134,Nagarkurnool,Andhra Pradesh,South
+ST135,Pithora,Chhattisgarh,North
+ST136,Ziro,Arunachal Pradesh,East
+ST137,Guruvayoor,Kerala,South
+ST138,Ponnur,Andhra Pradesh,South
+ST139,Sirsilla,Andhra Pradesh,South
+ST140,Champa,Chhattisgarh,North
+ST141,Khajoori Khas,Delhi,North
+ST142,Guntur,Andhra Pradesh,South
+ST143,Tarsali,Gujarat,West
+ST144,Madanapalle,Andhra Pradesh,South
+ST145,Bapatla,Andhra Pradesh,South
+ST146,Khairagarh,Chhattisgarh,North
+ST147,Kamareddy,Andhra Pradesh,South
+ST148,Amadalavalasa,Andhra Pradesh,South
+ST149,Amreli,Gujarat,West
+ST150,Duru-Verinag,Jammu & Kashmir,North
+ST151,Durg,Chhattisgarh,North
+ST152,Alnavar,Karnataka,South
+ST153,Bowali,West Bengal,East
+ST154,Naspur,Andhra Pradesh,South
+ST155,Pahalgam,Jammu & Kashmir,North
+ST156,Bade Bacheli,Chhattisgarh,North
+ST157,Samalkota,Andhra Pradesh,South
+ST158,Lormi,Chhattisgarh,North
+ST159,Chilla Saroda Bangar,Delhi,North
+ST160,Pitapuram,Andhra Pradesh,South
+ST161,Sikka,Gujarat,West
+ST162,Muvattupuzha,Kerala,South
+ST163,Singapur,Andhra Pradesh,South
+ST164,Nellimaria,Andhra Pradesh,South
+ST165,Pooth Khurd,Delhi,North
+ST166,Kapas Hera,Delhi,North
+ST167,Chirala,Andhra Pradesh,South
+ST168,Wanaparthi,Andhra Pradesh,South
+ST169,Sarigam INA,Gujarat,West
+ST170,Kannivadi,Tamil Nadu,South
+ST171,Venkatagiri,Andhra Pradesh,South
+ST172,Nandura,Maharashtra,West
+ST173,Kyathampalle,Andhra Pradesh,South
+ST174,Nagamangala,Karnataka,South
+ST175,Kolathur,Tamil Nadu,South
+ST176,Memnagar,Gujarat,West
+ST177,Adilabad,Andhra Pradesh,South
+ST178,Pedana,Andhra Pradesh,South
+ST179,Ongole,Andhra Pradesh,South
+ST180,Vijayawada,Andhra Pradesh,South
+ST181,Bandarulanka,Andhra Pradesh,South
+ST182,Jarjapupeta,Andhra Pradesh,South
+ST183,Dundahera,Haryana,North
+ST184,Sadasivpet,Andhra Pradesh,South
+ST185,Kumhari,Chhattisgarh,North
+ST186,Siddipet,Andhra Pradesh,South
+ST187,Jaffrabad,Delhi,North
+ST188,Kharsia,Chhattisgarh,North
+ST189,Gokak Falls,Karnataka,South
+ST190,Jaggayyapet,Andhra Pradesh,South
+ST191,Chhatral INA,Gujarat,West
+ST192,Ghatkeser,Andhra Pradesh,South
+ST193,Uthamapalayam,Tamil Nadu,South
+ST194,Kapra,Andhra Pradesh,South
+ST195,Hindoria,Madhya Pradesh,North
+ST196,Dowleswaram,Andhra Pradesh,South
+ST197,Hajira INA,Gujarat,West
+ST198,Salur,Andhra Pradesh,South
+ST199,Libas Pur,Delhi,North
+ST200,Holalkere,Karnataka,South
+ST201,Bhilai Charoda,Chhattisgarh,North
+ST202,Ahmedabad Cantonment,Gujarat,West
+ST203,Bhadrachalam,Andhra Pradesh,South
+ST204,Khambhalia,Gujarat,West
+ST205,Iriveri,Kerala,South
+ST206,Bagbahara,Chhattisgarh,North
+ST207,Vallabh Vidhyanagar,Gujarat,West
+ST208,Joshipura,Gujarat,West
+ST209,Halol,Gujarat,West
+ST210,Bheemunipatnam,Andhra Pradesh,South
+ST211,Chharchha,Chhattisgarh,North
+ST212,Kottuvally,Kerala,South
+ST213,Bugganipalle,Andhra Pradesh,South
+ST214,Chhuikhadan,Chhattisgarh,North
+ST215,Satai,Madhya Pradesh,North
+ST216,Hosanagara,Karnataka,South
+ST217,Rayadurg,Andhra Pradesh,South
+ST218,Kallur,Andhra Pradesh,South
+ST219,Bannur,Karnataka,South
+ST220,Sindkhed Raja,Maharashtra,West
+ST221,Mandamarri,Andhra Pradesh,South
+ST222,Akkayapalle,Andhra Pradesh,South
+ST223,Sidlaghatta,Karnataka,South
+ST224,Guhagar,Maharashtra,West
+ST225,Rayachoti,Andhra Pradesh,South
+ST226,Kuchera,Rajasthan,North
+ST227,Miryalguda,Andhra Pradesh,South
+ST228,Devanhalli,Karnataka,South
+ST229,Gulbarga,Karnataka,South
+ST230,Dommara Nandyal,Andhra Pradesh,South
+ST231,Rohtak,Haryana,North
+ST232,Nizamabad,Andhra Pradesh,South
+ST233,Bobbili,Andhra Pradesh,South
+ST234,Dantewada,Chhattisgarh,North
+ST235,Begum Pur,Delhi,North
+ST236,Gaddi annaram,Andhra Pradesh,South
+ST237,Kanakkampalayam,Tamil Nadu,South
+ST238,Kanuru,Andhra Pradesh,South
+ST239,Homnabad,Karnataka,South
+ST240,Paonta Sahib,Himachal Pradesh,North
+ST241,Kandukur,Andhra Pradesh,South
+ST242,Gudibanda,Karnataka,South
+ST243,Pandavapura,Karnataka,South
+ST244,Kathujuganapalli,Tamil Nadu,South
+ST245,Kothnur,Karnataka,South
+ST246,Ambikapur,Chhattisgarh,North
+ST247,Aland,Karnataka,South
+ST248,Ranavav,Gujarat,West
+ST249,Mehmand,Chhattisgarh,North
+ST250,Pampore,Jammu & Kashmir,North
+ST251,Ashta,Madhya Pradesh,North
+ST252,Sevilimedu,Tamil Nadu,South
+ST253,Mahendragarh,Haryana,North
+ST254,Balakrishnapuram,Tamil Nadu,South
+ST255,Zahirabad,Andhra Pradesh,South
+ST256,Tirupati,Andhra Pradesh,South
+ST257,Ratanpur,Chhattisgarh,North
+ST258,Patancheru,Andhra Pradesh,South
+ST259,Hastsal,Delhi,North
+ST260,Sompeta,Andhra Pradesh,South
+ST261,Jamul,Chhattisgarh,North
+ST262,Khongapani,Chhattisgarh,North
+ST263,Maheshtala,West Bengal,East
+ST264,Banda,Madhya Pradesh,North
+ST265,Jammalamadugu,Andhra Pradesh,South
+ST266,Raigarh,Chhattisgarh,North
+ST267,Bodhan,Andhra Pradesh,South
+ST268,Pantheeramkavu,Kerala,South
+ST269,Halvad,Gujarat,West
+ST270,Perumagalur,Tamil Nadu,South
+ST271,Kavisuryanagar,Orissa,East
+ST272,Gudivada,Andhra Pradesh,South
+ST273,Chuari Khas,Himachal Pradesh,North
+ST274,Khan Sahib,Jammu & Kashmir,North
+ST275,Shahkot,Punjab,North
+ST276,Palakurthi,Andhra Pradesh,South
+ST277,Pasighat,Arunachal Pradesh,East
+ST278,Naraingarh,Haryana,North
+ST279,Gagret,Himachal Pradesh,North
+ST280,Jalalpore,Gujarat,West
+ST281,Ichchhapor,Gujarat,West
+ST282,Jallaram Kamanpur,Andhra Pradesh,South
+ST283,Vepagunta,Andhra Pradesh,South
+ST284,Natrampalli,Tamil Nadu,South
+ST285,Utran,Gujarat,West
+ST286,Khariar,Orissa,East
+ST287,Karuvanthuruthy,Kerala,South
+ST288,Gajularega,Andhra Pradesh,South
+ST289,Jatari,Uttar Pradesh,North
+ST290,Serilingampalle,Andhra Pradesh,South
+ST291,Secunderabad,Andhra Pradesh,South
+ST292,Tirthahalli,Karnataka,South
+ST293,Kadipur,Uttar Pradesh,North
+ST294,Rampur Baghelan,Madhya Pradesh,North
+ST295,Bedi,Gujarat,West
+ST296,Kurnool,Andhra Pradesh,South
+ST297,Ahiwara,Chhattisgarh,North
+ST298,Gheora,Delhi,North
+ST299,Hatti,Karnataka,South
+ST300,Baikunthpur,Chhattisgarh,North
+ST301,Chatakonda,Andhra Pradesh,South
+ST302,Chiknayakanhalli,Karnataka,South
+ST303,Bhongir,Andhra Pradesh,South
+ST304,Pauni,Maharashtra,West
+ST305,Vizianagaram,Andhra Pradesh,South
+ST306,Kalayat,Haryana,North
+ST307,Mowa,Chhattisgarh,North
+ST308,Bawana,Delhi,North
+ST309,Balrampur,Uttar Pradesh,North
+ST310,Vaparala,Andhra Pradesh,South
+ST311,R.Pudupatti,Tamil Nadu,South
+ST312,Papampeta,Andhra Pradesh,South
+ST313,Itanagar,Arunachal Pradesh,East
+ST314,Attayampatti,Tamil Nadu,South
+ST315,Himatnagar,Gujarat,West
+ST316,Chavakkad,Kerala,South
+ST317,Dhandhuka,Gujarat,West
+ST318,Munirabad Project Area,Karnataka,South
+ST319,Khandra,West Bengal,East
+ST320,Asifabad,Andhra Pradesh,South
+ST321,Ghogha,Gujarat,West
+ST322,Hangal,Karnataka,South
+ST323,Aarambhada,Gujarat,West
+ST324,Bajva,Gujarat,West
+ST325,Bhopal,Madhya Pradesh,North
+ST326,Ranibennur,Karnataka,South
+ST327,Bilgi,Karnataka,South
+ST328,Khilchipur,Madhya Pradesh,North
+ST329,Vinukonda,Andhra Pradesh,South
+ST330,Tekanpur,Madhya Pradesh,North
+ST331,Kargil,Jammu & Kashmir,North
+ST332,Ghatlodiya,Gujarat,West
+ST333,Bakani,Rajasthan,North
+ST334,Daroha,Punjab,North
+ST335,Asola,Delhi,North
+ST336,Aravankad,Tamil Nadu,South
+ST337,Thiruneermalai,Tamil Nadu,South
+ST338,Kantabamsuguda,Andhra Pradesh,South
+ST339,Arang,Chhattisgarh,North
+ST340,Telgaon,Chhattisgarh,North
+ST341,Bharoli Kalan,Punjab,North
+ST342,Kari,Madhya Pradesh,North
+ST343,Kinathukadavu,Tamil Nadu,South
+ST344,Ramban,Jammu & Kashmir,North
+ST345,Dyane,Maharashtra,West
+ST346,Ludhiana,Punjab,North
+ST347,Okha port,Gujarat,West
+ST348,Maharajpur,Madhya Pradesh,North
+ST349,Sira,Karnataka,South
+ST350,Avadi,Tamil Nadu,South
+ST351,Proddatur,Andhra Pradesh,South
+ST352,Khamhria,Chhattisgarh,North
+ST353,Telhara,Maharashtra,West
+ST354,Farakhpur,Haryana,North
+ST355,Gajendragarh,Karnataka,South
+ST356,Vapi,Gujarat,West
+ST357,Narsipatnam,Andhra Pradesh,South
+ST358,Malkajgiri,Andhra Pradesh,South
+ST359,Berasia,Madhya Pradesh,North
+ST360,Vijainagar,Rajasthan,North
+ST361,Yemmiganur,Andhra Pradesh,South
+ST362,Lucknow,Uttar Pradesh,North
+ST363,Rayya,Punjab,North
+ST364,Farrukhnagar,Haryana,North
+ST365,Jafrabad,Gujarat,West
+ST366,Kansepur,Haryana,North
+ST367,Taj Pul,Delhi,North
+ST368,Pothatturpettai,Tamil Nadu,South
+ST369,Bilha,Chhattisgarh,North
+ST370,Goredi Chancha,Rajasthan,North
+ST371,Vartej,Gujarat,West
+ST372,Mogra Badshahpur,Uttar Pradesh,North
+ST373,Gohana,Haryana,North
+ST374,Maur,Punjab,North
+ST375,Tenali,Andhra Pradesh,South
+ST376,Sultan Pur,Delhi,North
+ST377,Bemetra,Chhattisgarh,North
+ST378,Balod,Chhattisgarh,North
+ST379,Nattarasankottai,Tamil Nadu,South
+ST380,Siduli,West Bengal,East
+ST381,Prantij,Gujarat,West
+ST382,Chalala,Gujarat,West
+ST383,Khanapur,Karnataka,South
+ST384,Damnagar,Gujarat,West
+ST385,Ramanayyapeta,Andhra Pradesh,South
+ST386,Garoth,Madhya Pradesh,North
+ST387,Jourian,Jammu & Kashmir,North
+ST388,Tiruchanur,Andhra Pradesh,South
+ST389,Talikota,Karnataka,South
+ST390,Saraipali,Chhattisgarh,North
+ST391,Vilapakkam,Tamil Nadu,South
+ST392,Murgud,Maharashtra,West
+ST393,Along,Arunachal Pradesh,East
+ST394,Takhatgarh,Rajasthan,North
+ST395,Chemmumiahpet,Andhra Pradesh,South
+ST396,Dadhapatna,Orissa,East
+ST397,Rajokri,Delhi,North
+ST398,Kurwai,Madhya Pradesh,North
+ST399,Budha Theh,Punjab,North
+ST400,Macherla,Andhra Pradesh,South
+ST401,Tadepalligudem,Andhra Pradesh,South
+ST402,Gooty,Andhra Pradesh,South
+ST403,Mahasamund,Chhattisgarh,North
+ST404,Dalhousie,Himachal Pradesh,North
+ST405,Tosham,Haryana,North
+ST406,Ahmedabad,Gujarat,West
+ST407,Talai,Himachal Pradesh,North
+ST408,Ramagundam,Andhra Pradesh,South
+ST409,Ziauddin Pur,Delhi,North
+ST410,Chandia,Madhya Pradesh,North
+ST410,Chandia,Madhya Pradesh,North
+ST412,Chincholi,Karnataka,South
+ST413,Vadgaon,Maharashtra,West
+ST414,Mungeli,Chhattisgarh,North
+ST415,Bhind,Madhya Pradesh,North
+ST416,Gondal,Gujarat,West
+ST417,Teegalapahad,Andhra Pradesh,South
+ST418,Aadityana,Gujarat,West
+ST419,Bhusawal,Maharashtra,West
+ST420,Boothipuram,Tamil Nadu,South
+ST421,Santokhgarh,Himachal Pradesh,North
+ST422,Tawang,Arunachal Pradesh,East
+ST423,Roshan Pura alias Dichaon Khurd,Delhi,North
+ST424,Hassanpur,Haryana,North
+ST425,Ramanujganj,Chhattisgarh,North
+ST426,Bodeli,Gujarat,West
+ST427,Sachin,Gujarat,West
+ST428,Avalpoondurai,Tamil Nadu,South
+ST429,Adalaj,Gujarat,West
+ST430,Udgir,Maharashtra,West
+ST431,Vijayapuri (North),Andhra Pradesh,South
+ST432,Kakinada,Andhra Pradesh,South
+ST433,Dayal Pur,Delhi,North
+ST434,Mangalagiri,Andhra Pradesh,South
+ST435,Bopal,Gujarat,West
+ST436,Badnagar,Madhya Pradesh,North
+ST437,Hunsur,Karnataka,South
+ST438,Puttur,Andhra Pradesh,South
+ST439,Krishnarajanagar,Karnataka,South
+ST440,Kharaghoda,Gujarat,West
+ST441,Naregal,Karnataka,South
+ST442,Amarwara,Madhya Pradesh,North
+ST443,Karanje Turf Satara,Maharashtra,West
+ST444,Ranoli,Gujarat,West
+ST445,Gharghoda,Chhattisgarh,North
+ST446,Unjha,Gujarat,West
+ST447,Jamai,Madhya Pradesh,North
+ST448,Kupwara,Jammu & Kashmir,North
+ST449,Ekambara kuppam,Andhra Pradesh,South
+ST450,Annamalai Nagar,Tamil Nadu,South
+ST451,Guntakal,Andhra Pradesh,South
+ST452,Kirkee,Maharashtra,West
+ST453,Chirakkal,Kerala,South
+ST454,Deesa,Gujarat,West
+ST455,Mandi Dabwali,Haryana,North
+ST456,Sopore,Jammu & Kashmir,North
+ST457,Sirgora,Madhya Pradesh,North
+ST458,Aurad,Karnataka,South
+ST459,Manendragarh,Chhattisgarh,North
+ST460,Palwancha,Andhra Pradesh,South
+ST461,Billawar,Jammu & Kashmir,North
+ST462,Nadiad,Gujarat,West
+ST463,Moragudi,Andhra Pradesh,South
+ST464,Mallar,Karnataka,South
+ST465,Gharoli,Delhi,North
+ST466,Hunasamaranahalli,Karnataka,South
+ST467,Basna,Chhattisgarh,North
+ST468,Betul,Madhya Pradesh,North
+ST469,Panipat Taraf Rajputan,Haryana,North
+ST470,Kalan Wali,Haryana,North
+ST471,Jintur,Maharashtra,West
+ST472,Chitrakoot,Madhya Pradesh,North
+ST473,Rampachodavaram,Andhra Pradesh,South
+ST474,Badami Bagh,Jammu & Kashmir,North
+ST475,Urla,Chhattisgarh,North
+ST476,Naya Baradwar,Chhattisgarh,North
+ST477,Birgaon,Chhattisgarh,North
+ST478,Khour,Jammu & Kashmir,North
+ST479,Thanjavur,Tamil Nadu,South
+ST480,Srikalahasti,Andhra Pradesh,South
+ST481,Bhanpura,Madhya Pradesh,North
+ST482,Akhnoor,Jammu & Kashmir,North
+ST483,Meerpet,Andhra Pradesh,South
+ST484,Mudalgi,Karnataka,South
+ST485,Shimla,Himachal Pradesh,North
+ST486,Tharangambadi,Tamil Nadu,South
+ST487,Gajapathinagaram,Andhra Pradesh,South
+ST488,Kailaras,Madhya Pradesh,North
+ST489,Sukhrali,Haryana,North
+ST490,Surada,Orissa,East
+ST491,Kharod,Chhattisgarh,North
+ST492,Dapoli Camp,Maharashtra,West
+ST493,Bhum,Maharashtra,West
+ST494,Kalpi,Uttar Pradesh,North
+ST495,Deori,Chhattisgarh,North
+ST496,Katghora,Chhattisgarh,North
+ST497,Chomu,Rajasthan,North
+ST498,Nayagarh,Orissa,East
+ST499,Mohanpur Mohammadpur,Uttaranchal,North
+ST500,Changanassery,Kerala,South
+ST501,Baloda,Chhattisgarh,North
+ST502,Rajendranagar,Andhra Pradesh,South
+ST503,Kondagaon,Chhattisgarh,North
+ST504,Chhindwara,Madhya Pradesh,North
+ST505,Mudushedde,Karnataka,South
+ST506,Tilpat,Haryana,North
+ST507,Naila Janjgir,Chhattisgarh,North
+ST508,Kardhan,Haryana,North
+ST509,Pataudi,Haryana,North
+ST510,Bardoli,Gujarat,West
+ST511,Loharu,Haryana,North
+ST512,Bashohli,Jammu & Kashmir,North
+ST513,Visnagar,Gujarat,West
+ST514,Osmanabad,Maharashtra,West
+ST515,Padianallur,Tamil Nadu,South
+ST516,Karimnagar,Andhra Pradesh,South
+ST517,Kalanaur,Punjab,North
+ST518,Chilakaluripet,Andhra Pradesh,South
+ST519,Vyara,Gujarat,West
+ST520,Indragarh,Rajasthan,North
+ST521,Dhule,Maharashtra,West
+ST522,Pilkhuwa,Uttar Pradesh,North
+ST523,Ghughuli,Uttar Pradesh,North
+ST524,Ratannagar,Rajasthan,North
+ST525,Awagarh,Uttar Pradesh,North
+ST526,Vadakara,Kerala,South
+ST527,Adyar,Karnataka,South
+ST528,Ambad,Maharashtra,West
+ST529,Umarkhed,Maharashtra,West
+ST530,Ichchapuram,Andhra Pradesh,South
+ST531,Dalli-Rajhara,Chhattisgarh,North
+ST532,Gurgaon,Haryana,North
+ST533,Konanakunte,Karnataka,South
+ST534,Kegaon,Maharashtra,West
+ST535,Bhuj,Gujarat,West
+ST536,Dongargaon,Chhattisgarh,North
+ST537,Vapi INA,Gujarat,West
+ST538,Ranip,Gujarat,West
+ST539,Badami,Karnataka,South
+ST540,Brahmapur,Orissa,East
+ST541,Bagepalli,Karnataka,South
+ST542,Hindalgi,Karnataka,South
+ST543,Nilokheri,Haryana,North
+ST544,Dahanu,Maharashtra,West
+ST545,Jind,Haryana,North
+ST546,Quilandy,Kerala,South
+ST547,Burari,Delhi,North
+ST548,Galiakot,Rajasthan,North
+ST549,Delhi Municipal Corporation (U),Delhi,North
+ST550,Harduaganj,Uttar Pradesh,North
+ST551,Shahpura,Rajasthan,North
+ST552,Naduvattam,Tamil Nadu,South
+ST553,Bhanvad,Gujarat,West
+ST554,Brahmapuri,Maharashtra,West
+ST555,Vicarabad,Andhra Pradesh,South
+ST556,Doda,Jammu & Kashmir,North
+ST557,Chhawla,Delhi,North
+ST558,Mal,West Bengal,East
+ST559,Kollegal,Karnataka,South
+ST560,Wardha,Maharashtra,West
+ST561,Sihor,Gujarat,West
+ST562,Chanasma,Gujarat,West
+ST563,Athipattu,Tamil Nadu,South
+ST564,Devanangurichi,Tamil Nadu,South
+ST565,Bavla,Gujarat,West
+ST566,Khammam,Andhra Pradesh,South
+ST567,Bhatgaon,Chhattisgarh,North
+ST568,Nalgonda,Andhra Pradesh,South
+ST569,Kunzer,Jammu & Kashmir,North
+ST570,Bhalswa Jahangir Pur,Delhi,North
+ST571,Bhogadi,Karnataka,South
+ST572,Garautha,Uttar Pradesh,North
+ST573,Piploda,Madhya Pradesh,North
+ST574,Kappiyarai,Tamil Nadu,South
+ST575,Uppal Kalan,Andhra Pradesh,South
+ST576,Jetpur Navagadh,Gujarat,West
+ST577,Sheopur,Madhya Pradesh,North
+ST578,Koothappar,Tamil Nadu,South
+ST579,Radhanpur,Gujarat,West
+ST580,Bharuch INA,Gujarat,West
+ST581,Bomdila,Arunachal Pradesh,East
+ST582,Kokkothamangalam,Kerala,South
+ST583,Maduranthakam,Tamil Nadu,South
+ST584,Vastral,Gujarat,West
+ST585,Channapatna,Karnataka,South
+ST586,Bilgram,Uttar Pradesh,North
+ST587,Bhiwani,Haryana,North
+ST588,Mahbubnagar,Andhra Pradesh,South
+ST589,Sidhpur,Gujarat,West
+ST590,Tirumakudal-Narsipur,Karnataka,South
+ST591,Isnapur,Andhra Pradesh,South
+ST592,Umbergaon INA,Gujarat,West
+ST593,Freelandgunj,Gujarat,West
+ST594,Ferozepur Jhirka,Haryana,North
+ST595,Hodal,Haryana,North
+ST596,Limla,Gujarat,West
+ST597,Chandkheda,Gujarat,West
+ST598,Kunnathur,Tamil Nadu,South
+ST599,Kurgunta,Karnataka,South
+ST600,Kadambur,Tamil Nadu,South
+ST601,Igatpuri,Maharashtra,West
+ST602,Gandevi,Gujarat,West
+ST603,Dalurband,West Bengal,East
+ST604,Jashpur nagar,Chhattisgarh,North
+ST605,Cuddapah,Andhra Pradesh,South
+ST606,Bhaderwah,Jammu & Kashmir,North
+ST607,Achabal,Jammu & Kashmir,North
+ST608,Bamora,Madhya Pradesh,North
+ST609,Sultan Pur Majra,Delhi,North
+ST610,Urmar Tanda,Punjab,North
+ST611,Kampli,Karnataka,South
+ST612,Bellary,Karnataka,South
+ST613,Ode,Gujarat,West
+ST614,Kapadvanj,Gujarat,West
+ST615,Mandvi,Gujarat,West
+ST616,Motera,Gujarat,West
+ST617,Anklav,Gujarat,West
+ST618,Narasimhanaickenpalayam,Tamil Nadu,South
+ST619,Jaygaon,West Bengal,East
+ST620,Dharampur,Gujarat,West
+ST621,Mulagumudu,Tamil Nadu,South
+ST622,Paddhari,Gujarat,West
+ST623,Boriavi,Gujarat,West
+ST624,Amalapuram,Andhra Pradesh,South
+ST625,Mandaikadu,Tamil Nadu,South
+ST626,Ganguvarpatti,Tamil Nadu,South
+ST627,Pethampalayam,Tamil Nadu,South
+ST628,Khonsa,Arunachal Pradesh,East
+ST629,Jhajjar,Haryana,North
+ST630,Rajahmundry,Andhra Pradesh,South
+ST631,Bhainsa,Andhra Pradesh,South
+ST632,Amarpatan,Madhya Pradesh,North
+ST633,Ukwa,Madhya Pradesh,North
+ST634,Mahad,Maharashtra,West
+ST635,Yellandu,Andhra Pradesh,South
