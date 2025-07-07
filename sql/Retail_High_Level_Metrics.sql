@@ -159,8 +159,8 @@ order by Total_Revenue desc;
 SELECT
     Channel,
     round(SUM(Total_Amount), 2) AS TotalSales,
-    SUM(Quantity) AS TotalQuantity
-FROM Finalised_Records_1
+    SUM(Total_Qty) AS TotalQuantity
+FROM Orders360
 GROUP BY Channel
 ORDER BY TotalSales DESC;
 
@@ -299,15 +299,15 @@ WITH RankedCategories AS (
     SELECT
         seller_state,
         product_id,
-        SUM(Quantity) AS TotalUnitsSold,
-        ROW_NUMBER() OVER (PARTITION BY seller_state ORDER BY SUM(Quantity) DESC) AS rn
+        round(SUM(Total_Amount), 0) AS Revenue,
+        ROW_NUMBER() OVER (PARTITION BY seller_state ORDER BY SUM(Total_Amount) DESC) AS rn
     FROM Finalised_Records_1
     GROUP BY seller_state, product_id
 )
 SELECT
     seller_state,
     product_id,
-    TotalUnitsSold
+    Revenue
 FROM RankedCategories
 WHERE rn <= 3
 ORDER BY seller_state, rn;
@@ -393,15 +393,15 @@ from Finalised_Records_1
 group by Category
 order by rating desc;
 
--- Top 10 rated categories
-select Top 10
+-- Top 5 rated categories
+select Top 5
 Category, round(avg(Avg_rating*1.0), 2) as rating
 from Finalised_Records_1
 group by Category
 order by rating desc;
 
--- Bottom 10 rated categories
-select Top 10
+-- Bottom 5 rated categories
+select Top 5
 Category, round(avg(Avg_rating*1.0), 2) as rating
 from Finalised_Records_1
 group by Category
@@ -479,7 +479,7 @@ select sum(Discount)/sum(MRP) from Finalised_Records_1;
 
 
 select * from Finalised_Records_1; 
-select top 5 * from Customers360;
+select top 5 * from Customer360;
 select top 5 * from Orders360;
 select top 5 * from Stores360;
 
