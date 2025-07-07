@@ -74,7 +74,7 @@ with payment_counts as (
 select * into Customer360 from Final_Customer360;
 
 
-select * from Customers360;
+select * from Customer360;
 
 
 select distinct payment_type from OrderPayments; 
@@ -98,17 +98,19 @@ with A as (
     count(distinct F.product_id) as Unique_Products,
     sum(Quantity) as Total_Qty,
     count(distinct Category) as Total_categories,
-    sum(Total_Amount) as Total_amount,
-    sum(Quantity*Discount) as Total_discount,
-    sum(Cost_Per_Unit * Quantity) as Total_Cost,
+    round(sum(Total_Amount), 2) as Total_amount,
+    round(sum(Quantity*Discount), 2) as Total_discount,
+    round(sum(Cost_Per_Unit * Quantity), 2) as Total_Cost,
+    round(sum(MRP * Quantity), 2) as MRP,
     round(sum(Total_Amount - (Cost_Per_Unit * Quantity)), 2) as Total_Profit,
     max(Bill_datetime) as Order_datetime,
     sum(case when datepart(dw, Bill_datetime) in (1, 7) then 1 else 0 end) as Weekend_trans,
-    avg(Total_Amount) as Avg_Order_value,
+    round(avg(Total_Amount), 2) as Avg_Order_value,
     case when sum(Total_Amount) > (select avg(Total_Amount) from Finalised_Records_1) then 1 else 0 end as Flag_High_value_order,
     avg(Avg_rating) as Avg_order_rating,
     round(avg(Total_Amount - (Cost_Per_Unit * Quantity)), 2) as Avg_Profit,
     avg(Discount) as Avg_Discount,
+    max(Gender) as Gender,
     max(case 
         when (datepart(hour, Bill_datetime) <= 4) then 'Early Morning'
         when (datepart(hour, Bill_datetime) <= 8) then 'Morning'
@@ -116,13 +118,20 @@ with A as (
         when (datepart(hour, Bill_datetime) <= 16) then 'Afternoon'
         when (datepart(hour, Bill_datetime) <= 20) then 'Evening'
         when (datepart(hour, Bill_datetime) <= 24) then 'Night'
-    end) as Time_of_Day
+    end) as Time_of_Day,
+    max(Channel) as Channel,
+    max(seller_state) as seller_state,
+    max(seller_city) as seller_city,
+    max(customer_state) as customer_state,
+    max(customer_city) as customer_city,
+    max(Region) as Region,
+    count(distinct Delivered_StoreID) as Number_of_Stores
     from Finalised_Records_1 as F 
     group by order_id
 ) 
 select * into Orders360 from A;
 
-
+select * from Finalised_Records_1;
 select * from Orders360;
 
 drop table Stores360;
@@ -189,7 +198,11 @@ with payment_metrics as (
     max(P.credit_card_payment_amount) as credit_card_payment_amount,
     max(P.debit_card_payment_amount) as debit_card_payment_amount,
     max(P.UPI_payment_amount) as UPI_payment_amount,
-    max(P.voucher_payment_amount) as voucher_payment_amount
+    max(P.voucher_payment_amount) as voucher_payment_amount,
+    sum(case when Gender = 'M' then 1 else 0 end) as Male_trans,
+    sum(case when Gender = 'F' then 1 else 0 end) as Female_trans,
+    round(sum(case when Gender = 'M' then Total_Amount else 0 end), 0) as Male_Revenue,
+    round(sum(case when Gender = 'F' then Total_Amount else 0 end), 0) as Female_Revenue
     from Finalised_Records_1 as F
     join payment_metrics as P on F.Delivered_StoreID = P.Delivered_StoreID
     group by F.Delivered_StoreID
