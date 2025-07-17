@@ -1,31 +1,28 @@
 -- Customer segmentation based on revenue
-WITH RevenuePercentiles AS (
-    SELECT 
-        PERCENTILE_CONT(0.33) WITHIN GROUP (ORDER BY Total_Spend) OVER () AS P33,
-        PERCENTILE_CONT(0.66) WITHIN GROUP (ORDER BY Total_Spend) OVER () AS P66
-    FROM Customers360
-), SEGMENTED_CUST AS (
-    SELECT 
-        Customer_id,
-        Cust_city,
-        Cust_State,
-        Gender,
-        Total_Spend,
-        CASE
-            WHEN Total_Spend < rp.P33 THEN 'Low Revenue'
-            WHEN Total_Spend < rp.P66 THEN 'Medium Revenue'
-            ELSE 'High Revenue'
-        END AS RevenueSegment
-    FROM Customers360 c
-    CROSS JOIN RevenuePercentiles rp
-)
-SELECT RevenueSegment, SUM(Total_Spend) AS TOTAL_REVENUE
-FROM SEGMENTED_CUST
-GROUP BY RevenueSegment;
+-- Creating new column for Revenue Segmentation
+ALTER TABLE Customer360
+ADD RevenueSegment VARCHAR(20);
 
+WITH CTE AS (
+SELECT 
+    Customer_Id,
+    CASE
+        WHEN Total_Spend < PERCENTILE_CONT(0.33) WITHIN GROUP (ORDER BY Total_Spend) OVER () THEN 'Low Revenue'
+        WHEN Total_Spend < PERCENTILE_CONT(0.66) WITHIN GROUP (ORDER BY Total_Spend) OVER () THEN 'Medium Revenue'
+        ELSE 'High Revenue'
+    END AS RS
+    FROM Customer360
+) 
+UPDATE C1
+SET C1.RevenueSegment = C2.RS
+FROM Customer360 C1
+JOIN CTE C2 ON C1.Customer_Id = C2.Customer_Id;
 
 
 -- RFM Segmentation
+ALTER TABLE Customer360
+ADD Customer_Segment VARCHAR(10);
+
 SELECT 
     Customer_id,
     Cust_city,
@@ -33,47 +30,35 @@ SELECT
     Gender,
     Total_Transactions,
     Total_Spend,
-    DATEDIFF(DAY, CAST(Last_trans_date AS DATE), GETDATE()) AS Recency,
+    DATEDIFF(DAY, CAST(Last_trans_date AS DATE), '2023-10-31') AS Recency,
     NTILE(4) OVER (ORDER BY DATEDIFF(DAY, CAST(Last_trans_date AS DATE), CAST('2023/10/31' AS DATE)) ASC) AS R_Score,
     NTILE(4) OVER (ORDER BY Total_Transactions DESC) AS F_Score,
     NTILE(4) OVER (ORDER BY Total_Spend DESC) AS M_Score
 INTO #RFM_Scores
-FROM Customers360;
+FROM Customer360;
+
+SELECT * FROM #RFM_Scores;
 
 -- Now assign segments based on total RFM score (R+F+M)
 WITH CTE AS (
-SELECT *,
-    (R_Score + F_Score + M_Score) AS RFM_Total,
-    CASE
-        WHEN (R_Score + F_Score + M_Score) >= 10 THEN 'Premium'
-        WHEN (R_Score + F_Score + M_Score) >= 8 THEN 'Gold'
-        WHEN (R_Score + F_Score + M_Score) >= 5 THEN 'Silver'
-        ELSE 'Standard'
-    END AS Customer_Segment
-FROM #RFM_Scores) 
-SELECT CTE.Customer_Segment, COUNT(*) AS TOTAL_CUST 
-FROM Customers360 C 
-JOIN CTE ON C.Customer_id = CTE.Customer_id
-GROUP BY CTE.Customer_Segment;
-
+    SELECT *,
+        (R_Score + F_Score + M_Score) AS RFM_Total,
+        CASE
+            WHEN (R_Score + F_Score + M_Score) >= 10 THEN 'Premium'
+            WHEN (R_Score + F_Score + M_Score) >= 8 THEN 'Gold'
+            WHEN (R_Score + F_Score + M_Score) >= 5 THEN 'Silver'
+            ELSE 'Standard'
+        END AS CS
+    FROM #RFM_Scores
+) 
+UPDATE C
+SET C.Customer_Segment = CTE.CS
+FROM Customer360 C 
+JOIN CTE ON C.Customer_id = CTE.Customer_id;
 
 -- Customers who have purchased from all channels
-select * from Customers360
+select * from Customer360
 where Unique_Channels = 3;      -- Only 1 customer
-
--- DISCOUNT / NON DISCOUNT SEEKERS
-WITH CTE AS (
-    SELECT Customer_id,
-    CASE 
-        WHEN Total_Trans_with_Discount/Total_Transactions >= 0.7 THEN 'Discount Seeker' ELSE 'Non-Discount Seeker'
-    END AS DiscountBehaviour
-    FROM Customers360
-)
-SELECT CTE.DiscountBehaviour, COUNT(*) TOTAL_CUST, round(AVG(C.Total_Spend),2) as Avg_spend
-FROM Customers360 C 
-JOIN CTE ON C.Customer_id = CTE.Customer_id
-GROUP BY CTE.DiscountBehaviour;
-
 
 -- Channel used by Customers
 SELECT Channel, COUNT(DISTINCT order_id) AS TotalOrders, COUNT(DISTINCT Customer_id) AS TotalCustomers
@@ -102,15 +87,15 @@ WITH Category_Behavior AS (
         Total_Spend,
         Total_Transactions,
         Avg_trans_amt,
-        DATEDIFF(DAY, CAST(Last_trans_date AS DATE), GETDATE()) AS Recency_Days,
+        DATEDIFF(DAY, CAST(Last_trans_date AS DATE), '2023-10-31') AS Recency_Days,
         Preferred_pay_type
-    FROM Customers360
+    FROM Customer360
 )
 SELECT 
     Category_Type,
     COUNT(*) AS Customer_Count,
     AVG(Total_Spend) AS Avg_Spend,
-    AVG(Total_Transactions) AS Avg_Transactions,
+    AVG(Total_Transactions*1.0) AS Avg_Transactions,
     AVG(Avg_trans_amt) AS Avg_Transaction_Value,
     AVG(Recency_Days) AS Avg_Recency_Days,
 
@@ -126,6 +111,49 @@ SELECT
 FROM Category_Behavior cb1
 GROUP BY Category_Type;
 
+-- Discount vs Non-Discount Seekers
+-- Creating a column to store that flag value
+ALTER TABLE Customer360
+ADD Discount_Seeker_Flag VARCHAR(20);
+
+UPDATE Customer360
+SET Discount_Seeker_Flag = CASE WHEN (Total_Trans_with_Discount/Total_Transactions) >= 0.7 THEN 'Discount Seeker' ELSE 'Non-Discount Seeker' END;
+
+SELECT
+Discount_Seeker_Flag, 
+COUNT(*) Total_Customers,
+SUM(CASE WHEN Gender = 'M' THEN 1 ELSE 0 END) AS Male_Cust,
+SUM(CASE WHEN Gender = 'F' THEN 1 ELSE 0 END) AS Female_Cust,
+AVG(Total_Quantity*1.0) Average_Quanity,
+AVG(Total_unique_categories*1.0) Average_Categories,
+AVG(Total_unique_products*1.0) Average_Products,
+AVG(Total_Spend) Average_Spend,
+AVG(Total_Discount) Average_Discount,
+AVG(Total_Profit) Average_Profit,
+AVG(Average_rating*1.0) as Average_Rating
+FROM Customer360
+GROUP BY Discount_Seeker_Flag; 
+
+-- Trend Analysis
+SELECT 
+CAST(YEAR(Order_datetime) AS VARCHAR(4)) + '-' + RIGHT('0' + CAST(MONTH(Order_datetime) AS VARCHAR(2)), 2) AS [Month],
+Category,
+SUM(Total_amount)
+FROM Orders360
+GROUP BY CAST(YEAR(Order_datetime) AS VARCHAR(4)) + '-' + RIGHT('0' + CAST(MONTH(Order_datetime) AS VARCHAR(2)), 2), Category
+ORDER BY [Month];
+
+-- Revenue by Category in each region
+SELECT
+Region,
+Category,
+SUM(Total_amount)
+FROM Orders360
+GROUP BY Region, Category
+ORDER BY Region;
+
+select * from Orders360;
+select * from Customer360; 
 
 -- Total Sales & Percentage of sales by category (Perform Pareto Analysis)
 WITH CategorySales AS (
@@ -241,7 +269,7 @@ ORDER BY OrderMonth, Region, seller_state;
 
 
 
-select * from Customers360;
+select * from Customer360;
 select * from Orders360;
 select * from Stores360;
 select * from Finalised_Records_1;

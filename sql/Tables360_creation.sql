@@ -30,6 +30,7 @@ with payment_counts as (
     max(customer_city) as Cust_city, 
     max(customer_state) as Cust_State, 
     max(Gender) as Gender,
+    max(Region) as Region,
     min(Bill_datetime) as First_trans_date,
     max(Bill_datetime) as Last_trans_date,
     datediff(day, min(Bill_datetime), max(Bill_datetime)) as Tenure,
@@ -120,6 +121,7 @@ with A as (
         when (datepart(hour, Bill_datetime) <= 24) then 'Night'
     end) as Time_of_Day,
     max(Channel) as Channel,
+    max(Category) as Category,
     max(seller_state) as seller_state,
     max(seller_city) as seller_city,
     max(customer_state) as customer_state,
@@ -135,7 +137,7 @@ select * from Finalised_Records_1;
 select * from Orders360;
 
 drop table Stores360;
-drop table Customers360;
+drop table Customer360;
 drop table Orders360;
 
 -- Store360 Table

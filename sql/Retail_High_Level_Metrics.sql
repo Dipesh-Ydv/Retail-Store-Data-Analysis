@@ -7,7 +7,7 @@ select count(order_id) as Total_Orders from Orders360;
 select sum(Total_discount) as Total_Discount from Orders360;
 
 -- 3. Average discount per Customer
-select avg(Total_Discount*1.0) as Avg_Discount_per_Customer from Customers360;
+select avg(Total_Discount*1.0) as Avg_Discount_per_Customer from Customer360;
 
 -- 4. Average discount per Order
 select avg(Total_Discount*1.0) as Avg_Discount_per_Order from Orders360;
@@ -16,10 +16,10 @@ select avg(Total_Discount*1.0) as Avg_Discount_per_Order from Orders360;
 select round(avg(Total_amount), 2) as Average_order_value from Orders360;
 
 -- 6. Average sale per customer
-select round(avg(Total_Spend), 2) as Average_sale_per_customer from Customers360;
+select round(avg(Total_Spend), 2) as Average_sale_per_customer from Customer360;
 
 -- 7. Average profit per customer
-select round(avg(Total_Profit), 2) as Average_profit_per_customer from Customers360;
+select round(avg(Total_Profit), 2) as Average_profit_per_customer from Customer360;
 
 -- 8. Average categories per order
 select avg(Total_categories*1.0) as Avg_categories_per_order from Orders360;
@@ -28,10 +28,10 @@ select avg(Total_categories*1.0) as Avg_categories_per_order from Orders360;
 select avg(Total_Qty*1.0) as Avg_items_per_order from Orders360;
 
 -- 10. Number of Customers
-select count(*) as Total_Customers from Customers360;
+select count(*) as Total_Customers from Customer360;
 
 -- 11. Average Transactions per Customer
-select avg(Total_Transactions*1.0) as Average_trans_per_customer from Customers360;
+select avg(Total_Transactions*1.0) as Average_trans_per_customer from Customer360;
 
 -- 12. Total Revenue 
 select round(sum(Total_Revenue), 2) as Total_Revenue from Stores360;
@@ -65,7 +65,7 @@ select distinct Region from StoresInfo;
 select distinct payment_type from OrderPayments;
 
 -- 22. Total Customers locations
-select count(distinct Cust_city) as Total_cities, count(distinct Cust_State) Total_states from Customers360;
+select count(distinct Cust_city) as Total_cities, count(distinct Cust_State) Total_states from Customer360;
 
 -- 23. Average number of days between two transactions
 WITH OrderedTransactions AS (
@@ -96,14 +96,14 @@ select round(sum(discount) / sum(MRP) * 100, 2) Discount_Percentage from Finalis
 -- 26. Repeat Customer rate
 select 
 (count(case when Total_Transactions > 1 then 1 end) * 100.0) / count(Customer_id) as Repeat_Cust_perct
-from Customers360; -- there are only 36 repeating customers
+from Customer360; -- there are only 36 repeating customers
 
 select * from Finalised_Records_1 where customer_id = 1318738406;
 
 -- 27. One Time Buyers
 select 
 (count(case when Total_Transactions = 1 then 1 end) * 100.0) / count(Customer_id) as OneTime_Cust_perct
-from Customers360;
+from Customer360;
 
 -- 29. New customers every month (customer accusiton per month)
 WITH FirstOrders AS (
@@ -345,7 +345,7 @@ order by Total_Profit desc;
 select 
     Gender,
     round(sum(Total_Spend) , 2) as Total_Revenue
-from Customers360
+from Customer360
 group by Gender;
 
 
@@ -357,19 +357,19 @@ select avg(Total_Qty) from Stores360;
 select avg(Total_Revenue) from Stores360;
 
 select avg(Total_Profit) from Stores360;
-select avg(Number_of_products) from Stores360;
+select avg(Number_of_unique_products) from Stores360;
 select avg(Total_Discount) from Stores360;
 select avg(Customer_visits) from Stores360;
 select avg(Dist_categories) from Stores360;
 select avg(Total_Transactions) from Stores360;
-select avg(Avg_rating*1.0) from Stores360; -- 3.84
+select avg(average_rating*1.0) from Stores360; -- 3.84
 select avg(Avg_profit) from Stores360;
 select avg(Avg_profit) from Orders360;
 select avg(Total_Profit) from Orders360;
 select avg(Avg_order_rating*1.0) from Orders360; -- 4.1
-select avg(Average_rating*1.0) from Customers360; -- 4.1
+select avg(Average_rating*1.0) from Customer360; -- 4.1
 
-select sum(total_spend) from Customers360;
+select sum(total_spend) from Customer360;
 select sum(Total_amount) from Orders360;
 select sum(Total_Revenue) from Stores360;
 
@@ -483,3 +483,23 @@ select top 5 * from Customer360;
 select top 5 * from Orders360;
 select top 5 * from Stores360;
 
+
+
+select (sum(Total_Profit) / sum(Total_amount)) * 100 from orders360;
+
+select (sum(Total_Amount - (Cost_Per_Unit * Quantity)) / sum(Total_Amount) ) * 100
+from Finalised_Records_1;
+
+select count(distinct customer_id) from Orders;
+select count(distinct Custid) from Customers;
+
+SELECT CUSTOMER_ID, COUNT(DISTINCT ORDER_ID) ORDER_COUNT
+FROM ORDERS 
+GROUP BY CUSTOMER_ID
+HAVING COUNT(DISTINCT ORDER_ID) > 1
+ORDER BY ORDER_COUNT DESC;
+
+SELECT Cust_State, SUM(Total_Spend) Total_Revenue
+FROM Customer360
+GROUP BY Cust_State
+ORDER BY Total_Revenue DESC;
