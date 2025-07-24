@@ -18,6 +18,23 @@ SET C1.RevenueSegment = C2.RS
 FROM Customer360 C1
 JOIN CTE C2 ON C1.Customer_Id = C2.Customer_Id;
 
+--
+SELECT 
+RevenueSegment,
+COUNT(*) Total_Customers,
+SUM(CASE WHEN Gender = 'M' THEN 1 ELSE 0 END) AS Male_Cust,
+SUM(CASE WHEN Gender = 'F' THEN 1 ELSE 0 END) AS Female_Cust,
+SUM(CASE WHEN Gender = 'M' THEN Total_Spend END) AS Male_Revenue,
+SUM(CASE WHEN Gender = 'F' THEN Total_Spend END) AS Female_Revenue,
+SUM(Total_Spend) Revenue,
+AVG(Total_Spend) Avg_Spend,
+AVG(Total_Quantity*1.0) Avg_Qty,
+AVG(Average_Rating) Avg_Rating
+FROM Customer360
+GROUP BY RevenueSegment;
+
+select * from Customer360;
+select * from Orders360;
 
 -- RFM Segmentation
 ALTER TABLE Customer360
@@ -55,6 +72,43 @@ UPDATE C
 SET C.Customer_Segment = CTE.CS
 FROM Customer360 C 
 JOIN CTE ON C.Customer_id = CTE.Customer_id;
+
+-- Customer Segment Analysis
+SELECT
+Customer_Segment, 
+COUNT(*) Total_Customers,
+SUM(CASE WHEN Gender = 'M' THEN 1 ELSE 0 END) AS Male_Cust,
+SUM(CASE WHEN Gender = 'F' THEN 1 ELSE 0 END) AS Female_Cust,
+SUM(CASE WHEN Gender = 'M' THEN Total_Spend END) AS Male_Revenue,
+SUM(CASE WHEN Gender = 'F' THEN Total_Spend END) AS Female_Revenue,
+SUM(Total_Spend) Revenue,
+AVG(Total_Quantity*1.0) Average_Quanity,
+AVG(Total_unique_categories*1.0) Average_Categories,
+AVG(Total_unique_products*1.0) Average_Products,
+AVG(Total_Spend) Average_Spend,
+AVG(Total_Discount*1.0) Average_Discount,
+AVG(Total_Profit) Average_Profit,
+AVG(Average_rating*1.0) as Average_Rating
+FROM Customer360
+GROUP BY Customer_Segment; 
+
+-- Region wise Revenue distribution by Customer Segment
+SELECT
+Region,
+Customer_Segment,
+SUM(Total_Spend) AS Revenue
+FROM Customer360
+GROUP BY Region, Customer_Segment
+ORDER BY Region;
+
+-- Trend Analysis by Customer Segment
+SELECT 
+CAST(YEAR(First_trans_date) AS VARCHAR(4)) + '-' + RIGHT('0' + CAST(MONTH(First_trans_date) AS VARCHAR(2)), 2) AS [Month],
+Customer_Segment,
+SUM(Total_Spend)
+FROM Customer360
+GROUP BY CAST(YEAR(First_trans_date) AS VARCHAR(4)) + '-' + RIGHT('0' + CAST(MONTH(First_trans_date) AS VARCHAR(2)), 2), Customer_Segment
+ORDER BY [Month];
 
 -- Customers who have purchased from all channels
 select * from Customer360
@@ -124,15 +178,42 @@ Discount_Seeker_Flag,
 COUNT(*) Total_Customers,
 SUM(CASE WHEN Gender = 'M' THEN 1 ELSE 0 END) AS Male_Cust,
 SUM(CASE WHEN Gender = 'F' THEN 1 ELSE 0 END) AS Female_Cust,
+SUM(CASE WHEN Gender = 'M' THEN Total_Spend END) AS Male_Revenue,
+SUM(CASE WHEN Gender = 'F' THEN Total_Spend END) AS Female_Revenue,
+SUM(Total_Spend) Revenue,
 AVG(Total_Quantity*1.0) Average_Quanity,
 AVG(Total_unique_categories*1.0) Average_Categories,
 AVG(Total_unique_products*1.0) Average_Products,
 AVG(Total_Spend) Average_Spend,
-AVG(Total_Discount) Average_Discount,
+AVG(Total_Discount*1.0) Average_Discount,
 AVG(Total_Profit) Average_Profit,
 AVG(Average_rating*1.0) as Average_Rating
 FROM Customer360
 GROUP BY Discount_Seeker_Flag; 
+
+-- Revenue by Discount Seeker Flag
+SELECT Discount_Seeker_Flag, SUM(Total_Spend)
+FROM Customer360
+GROUP BY Discount_Seeker_Flag;
+
+-- Trend Analysis by Discount vs Non-Discount Seekers
+SELECT 
+CAST(YEAR(First_trans_date) AS VARCHAR(4)) + '-' + RIGHT('0' + CAST(MONTH(First_trans_date) AS VARCHAR(2)), 2) AS [Month],
+Discount_Seeker_Flag,
+SUM(Total_Spend)
+FROM Customer360
+GROUP BY CAST(YEAR(First_trans_date) AS VARCHAR(4)) + '-' + RIGHT('0' + CAST(MONTH(First_trans_date) AS VARCHAR(2)), 2), Discount_Seeker_Flag
+ORDER BY [Month];
+
+-- Region wise distribution Discount vs Non-Discount Seekers
+SELECT
+Region,
+Discount_Seeker_Flag,
+SUM(Total_Spend) AS Revenue
+FROM Customer360
+GROUP BY Region, Discount_Seeker_Flag
+ORDER BY Region;
+
 
 -- Trend Analysis
 SELECT 
@@ -142,6 +223,11 @@ SUM(Total_amount)
 FROM Orders360
 GROUP BY CAST(YEAR(Order_datetime) AS VARCHAR(4)) + '-' + RIGHT('0' + CAST(MONTH(Order_datetime) AS VARCHAR(2)), 2), Category
 ORDER BY [Month];
+
+SELECT YEAR(Order_datetime) AS Year_, MONTH(Order_datetime) Month_, Category, SUM(Total_amount) 
+FROM Orders360
+GROUP BY YEAR(Order_datetime), MONTH(Order_datetime), Category
+ORDER BY Year_, Month_;
 
 -- Revenue by Category in each region
 SELECT
@@ -263,10 +349,64 @@ SELECT *
 FROM AvgCategoriesPerBill
 ORDER BY OrderMonth, Region, seller_state;
 
+-- Top 5 Categories and their revenue contribution by seller state
+WITH CTE AS (
+    SELECT 
+    seller_state,
+    Category,
+    SUM(Total_amount) Revenue,
+    SUM(Total_Amount) / SUM(SUM(Total_amount)) OVER(PARTITION BY seller_state) AS PERCENT_CONTRIBUTION,
+    ROW_NUMBER() OVER(PARTITION BY seller_state ORDER BY SUM(Total_Amount) DESC) AS rnk
+    FROM Orders360
+    GROUP BY seller_state, Category
+) 
+SELECT *
+FROM CTE
+WHERE rnk <= 5;
 
+-- Top 5 Categories and their revenue contribution by REGION
+WITH CTE AS (
+    SELECT 
+    Region,
+    Category,
+    SUM(Total_amount) Revenue,
+    SUM(Total_Amount) / SUM(SUM(Total_amount)) OVER(PARTITION BY Region) AS PERCENT_CONTRIBUTION,
+    ROW_NUMBER() OVER(PARTITION BY Region ORDER BY SUM(Total_Amount) DESC) AS rnk
+    FROM Orders360
+    GROUP BY Region, Category
+) 
+SELECT *
+FROM CTE
+WHERE rnk <= 5;
 
--- 
+-- -- Top 1 Category and their revenue contribution by Store Id
+WITH CTE AS (
+    SELECT 
+    Delivered_StoreID,
+    Category,
+    SUM(Total_amount) Revenue,
+    SUM(Total_Amount) / SUM(SUM(Total_amount)) OVER(PARTITION BY Delivered_StoreID) AS PERCENT_CONTRIBUTION,
+    ROW_NUMBER() OVER(PARTITION BY Delivered_StoreID ORDER BY SUM(Total_Amount) DESC) AS rnk
+    FROM Finalised_Records_1
+    GROUP BY Delivered_StoreID, Category
+) 
+SELECT *
+FROM CTE
+WHERE rnk <= 1;
 
+SELECT 
+Day_of_Week,
+SUM(Total_Amount) Total_Revenue,
+SUM(Total_Amount)/ (SELECT SUM(Total_Amount) FROM Orders360) Perct_Contribution
+FROM Orders360
+GROUP BY Day_of_Week;
+
+SELECT 
+Time_of_Day,
+SUM(Total_Amount) Total_Revenue,
+SUM(Total_Amount)/ (SELECT SUM(Total_Amount) FROM Orders360) Perct_Contribution
+FROM Orders360
+GROUP BY Time_of_Day;
 
 
 select * from Customer360;

@@ -120,6 +120,16 @@ with A as (
         when (datepart(hour, Bill_datetime) <= 20) then 'Evening'
         when (datepart(hour, Bill_datetime) <= 24) then 'Night'
     end) as Time_of_Day,
+    max(
+        case    
+            when datepart(dw, Bill_datetime) = 1 then 'Sunday' 
+            when datepart(dw, Bill_datetime) = 2 then 'Monday' 
+            when datepart(dw, Bill_datetime) = 3 then 'Tuesday' 
+            when datepart(dw, Bill_datetime) = 4 then 'Wednesday' 
+            when datepart(dw, Bill_datetime) = 5 then 'Thrusday' 
+            when datepart(dw, Bill_datetime) = 6 then 'Friday' 
+            when datepart(dw, Bill_datetime) = 7 then 'Saturday' 
+    end) as Day_of_Week,
     max(Channel) as Channel,
     max(Category) as Category,
     max(seller_state) as seller_state,

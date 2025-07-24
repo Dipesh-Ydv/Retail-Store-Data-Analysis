@@ -324,7 +324,7 @@ select top 5
     round(sum(Total_Amount), 2) as Total_Revenue,
     round(sum(Total_Amount - (Quantity*Cost_Per_Unit)), 2) as Total_Profit
 from Finalised_Records_1
-group by product_id
+group by product_id 
 order by Total_Profit desc;
 
 -- 36. Top 5 Category by Qunatity
