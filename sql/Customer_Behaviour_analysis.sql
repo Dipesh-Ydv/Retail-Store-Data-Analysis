@@ -409,6 +409,27 @@ FROM Orders360
 GROUP BY Time_of_Day;
 
 
+-- STORE LEVEL ANALYSIS
+WITH CTE AS (
+    SELECT 
+    Store_id,
+    COUNT(DISTINCT Order_id) Total_Orders,
+    SUM(Total_amount) Store_Total_Revenue,
+    SUM(SUM(Total_Amount)) OVER() Total_Revenue,
+    AVG(Total_Amount) Avg_Spend,
+    SUM(Total_Qty) Total_Quantity,
+    AVG(Total_Qty*1.0) Average_Quanity,
+    SUM(Total_Profit) Total_Profit,
+    AVG(Total_Profit) Avg_Profit
+    FROM Orders360
+    GROUP BY Store_id
+)
+SELECT *,
+FORMAT(Store_Total_Revenue/Total_Revenue, 'P2') as Percentage_contribuiton 
+FROM CTE
+ORDER BY Store_Total_Revenue DESC;
+
+
 select * from Customer360;
 select * from Orders360;
 select * from Stores360;

@@ -1,0 +1,110 @@
+{
+  "name": "Retail Store Transaction Analysis Theme",
+  "dataColors": [
+    "#2E86AB",
+    "#F6C85F",
+    "#6FB07F",
+    "#D9534F",
+    "#9370DB",
+    "#00BFC4",
+    "#FFA07A"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#333333",
+  "tableAccent": "#2E86AB",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "title": [
+          {
+            "fontSize": 14,
+            "color": "#2E86AB"
+          }
+        ],
+        "labels": [
+          {
+            "color": "#333333",
+            "fontSize": 11
+          }
+        ]
+      }
+    },
+    "card": {
+      "*": {
+        "callout": [
+          {
+            "color": "#2E86AB",
+            "fontSize": 24
+          }
+        ],
+        "title": [
+          {
+            "color": "#333333",
+            "fontSize": 12
+          }
+        ]
+      }
+    },
+    "slicer": {
+      "*": {
+        "header": [
+          {
+            "fontSize": 12,
+            "color": "#2E86AB"
+          }
+        ],
+        "items": [
+          {
+            "fontSize": 11,
+            "color": "#333333"
+          }
+        ]
+      }
+    },
+    "tableEx": {
+      "*": {
+        "grid": [
+          {
+            "gridVertical": true,
+            "gridVerticalColor": { "solid": { "color": "#E0E0E0" } },
+            "gridVerticalWeight": 1
+          }
+        ],
+        "columnHeaders": [
+          {
+            "fontColor": { "solid": { "color": "#FFFFFF" } },
+            "backColor": { "solid": { "color": "#2E86AB" } },
+            "fontSize": 12
+          }
+        ],
+        "values": [
+          {
+            "fontSize": 11,
+            "color": "#333333"
+          }
+        ]
+      }
+    },
+    "matrix": {
+      "*": {
+        "columnHeaders": [
+          {
+            "fontColor": { "solid": { "color": "#FFFFFF" } },
+            "backColor": { "solid": { "color": "#2E86AB" } }
+          }
+        ],
+        "rowHeaders": [
+          {
+            "fontColor": { "solid": { "color": "#333333" } },
+            "backColor": { "solid": { "color": "#F6F8FA" } }
+          }
+        ],
+        "values": [
+          {
+            "fontColor": { "solid": { "color": "#333333" } }
+          }
+        ]
+      }
+    }
+  }
+}

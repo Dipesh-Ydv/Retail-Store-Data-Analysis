@@ -77,7 +77,6 @@ select * into Customer360 from Final_Customer360;
 
 select * from Customer360;
 
-
 select distinct payment_type from OrderPayments; 
 select distinct Category from ProductsInfo;
 
@@ -96,6 +95,8 @@ where Category = '#N/A';
 with A as (
     select 
     order_id,
+    max(Customer_id) as customer_id,
+    max(Delivered_StoreID) as Store_id,
     count(distinct F.product_id) as Unique_Products,
     sum(Quantity) as Total_Qty,
     count(distinct Category) as Total_categories,

@@ -63,16 +63,9 @@ select * from StoresInfo_new;
 -- ORDER_PAYMENT TABLE 
 
 
--- Deleting records whose order_id is not present in Orders table
-delete P 
-from OrderPayments_new P 
-left join Orders_new O on P.order_id = O.order_id
-where O.order_id is null;
-
-
 -- Aggregating payment values i.e only one payment amount for each payment type
 with T as (
-    select order_id, payment_type, sum(payment_value) total_payment
+    select order_id, payment_type, round(sum(payment_value), 2) total_payment
     from OrderPayments_new 
     group by order_id, payment_type    
 )
@@ -88,7 +81,7 @@ with C as (
     ROW_NUMBER() OVER(PARTITION BY order_id, payment_type ORDER BY payment_value desc) rn 
     from OrderPayments_new
 )
-delete from C where rn > 1;
+delete from C where rn > 1; -- 2200 records deleted
 
 
 -- Records where payment_value = 0
@@ -106,13 +99,6 @@ select * from OrderPayments_new;
 
 
 select * from OrderReviewRatings_new;
-
--- Deleting records whose order_id is not present in Orders table
-delete R 
-from OrderReviewRatings_new R 
-left join Orders_new O on R.order_id = O.order_id
-where O.order_id is null;
-
 
 -- Replacing each rating with the average rating
 with T as (
@@ -153,11 +139,6 @@ add Bill_datetime datetime;
 -- Inserting values in new column of correct data type using type casting
 update Orders_new 
 set Bill_datetime = CAST(Bill_date_timestamp as datetime);
-
--- This can also be done
--- Updating the value of the column itself
--- UPDATE Orders_new
--- set Bill_date_timestamp = CAST(Bill_date_timestamp as datetime);
 
 -- Deleting the old Bill_date_timestamp column
 alter table Orders_new
@@ -228,69 +209,141 @@ select * from Orders_new where order_id = '01cce1175ac3c4a450e3a0f856d02734';
 
 
 -- Solving discrepancy in Cumulative (Quantity, Total_Amont), Discount, and MRP
-with TBL as (
+with ranked_orders as (
     select *, 
     ROW_NUMBER() OVER(PARTITION BY order_id, product_id ORDER BY Quantity DESC) as rn 
     from Orders_new
 ) 
-update O
-set O.Quantity = TBL.Quantity,  -- (MRP - Discount) * Quantity
-O.MRP = TBL.MRP,
-O.Total_Amount = TBL.Total_Amount, 
-O.Discount = TBL.Discount
-from Orders_new O 
-join TBL on O.order_id = TBL.order_id and O.product_id = TBL.product_id 
-where TBL.rn = 1;
-
--- deleting the duplicate records
-with TBL as (
-    select *, 
-    ROW_NUMBER() OVER(PARTITION BY order_id, product_id ORDER BY Quantity DESC) as rn 
-    from Orders_new
-) 
-delete from TBL 
-where rn > 1;   -- 10,222 records deleted
+delete o 
+from orders_new o
+join ranked_orders r on o.order_id = r.order_id and o.product_id = r.product_id and o.quantity = r.quantity 
+where r.rn > 1;     -- 10,222 records affected
 
 
 -- records with different amount in Orders and OrderPayment table
-with A as (
-    select order_id, round(sum(Total_Amount), 0) as Total_Amount
+with orders_total as (
+    select order_id, round(sum(Total_Amount), 2) as Total_Amount
     from Orders_new
     group by customer_id, order_id 
 ), 
-B as (
-    select order_id, round(sum(payment_value), 0) as Payment_value
+payments_total as (
+    select order_id, round(sum(payment_value), 2) as Payment_value
     from OrderPayments_new
     group by order_id
 ),
-C as (
-    select A.order_id
-    from A 
-    join B on A.order_id = B.order_id
-    where A.Total_Amount <> B.Payment_value
-) select * from C;
-delete from Orders_new
-where order_id in (select * from C); -- 3481    -- 7240 rows deleted
+mismatched_orders as (
+    select o.order_id
+    from orders_total o
+    join payments_total p on o.order_id = p.order_id
+    where o.Total_Amount <> p.Payment_value
+) 
+select * from mismatched_orders;    -- 3580 records
 
 
-select * from Orders_new where order_id = '012a238ab54294a3b365812ccc82b135';
-select * from OrderPayments_new where order_id = '012a238ab54294a3b365812ccc82b135';
-select * from Orders_new where order_id = '005d9a5423d47281ac463a968b3936fb';
-select * from OrderPayments_new where order_id = '005d9a5423d47281ac463a968b3936fb';
+-- Treating above records
+with orders_total as (
+    select order_id, round(sum(Total_Amount), 2) as Total_Amount
+    from Orders_new
+    group by customer_id, order_id 
+), 
+payments_total as (
+    select order_id, round(sum(payment_value), 2) as Payment_value
+    from OrderPayments_new
+    group by order_id
+),
+mismatched_orders as (
+    select o.order_id
+    from orders_total o
+    join payments_total p on o.order_id = p.order_id
+    where o.Total_Amount <> p.Payment_value
+) 
+select 
+    o.customer_id,
+    o.order_id,
+    o.product_id,
+    o.channel,
+    o.Delivered_StoreID,
+    o.Bill_datetime,
+    o.cost_per_unit,
+    o.mrp,
+    o.discount,
 
-select * from Orders_new; --102,421
+    -- Adjusted quantity only for mismatched orders
+    CASE 
+        WHEN m.order_id IS NOT NULL THEN 1
+        ELSE o.quantity
+    END AS quantity,
+
+    -- Adjusted total_amount only for mismatched orders
+    CASE 
+        WHEN m.order_id IS NOT NULL THEN ROUND((o.mrp - o.discount) * 1, 2)
+        ELSE ROUND(o.total_amount, 2)
+    END AS total_amount
+
+INTO orders_clean_temp
+FROM orders_new o
+LEFT JOIN mismatched_orders m ON o.order_id = m.order_id;
+
+select * from orders_clean_temp;        -- 102,421
+
+
+-- Step 4: Replace original data
+DELETE FROM orders_new;
+
+INSERT INTO orders_new (
+    customer_id, order_id, product_id, channel, Delivered_StoreID, Bill_datetime,
+    cost_per_unit, mrp, discount, quantity, total_amount
+)
+SELECT 
+    customer_id, order_id, product_id, channel, Delivered_StoreID, Bill_datetime,
+    cost_per_unit, mrp, discount, quantity, total_amount
+FROM orders_clean_temp;
+
+-- Step 5: Drop the temp table
+DROP TABLE orders_clean_temp;
+
+
+
+-- now i am gonna drop order id whose sum of total amount doesnt match with the sum of payment value
+-- Step 1: Identify mismatched order IDs
+WITH order_totals AS (
+    SELECT order_id, ROUND(SUM(total_amount), 2) AS order_total
+    FROM orders_new
+    GROUP BY order_id
+),
+payment_totals AS (
+    SELECT order_id, ROUND(SUM(payment_value), 2) AS payment_total
+    FROM OrderPayments_new
+    GROUP BY order_id
+),
+mismatched_orders AS (
+    SELECT o.order_id
+    FROM order_totals o
+    JOIN payment_totals p ON o.order_id = p.order_id
+    WHERE o.order_total != p.payment_total
+)
+-- Step 2: Delete all rows from orders_clean with those order_ids
+DELETE FROM orders_new
+WHERE order_id IN (SELECT order_id FROM mismatched_orders);
+
+
+select * from Orders_new; --101,158
 select * from OrderPayments_new;
 
--- All have equal number of records
-select distinct order_id from Orders_new;
+
+select distinct order_id from Orders_new;       --97,908
 select distinct order_id from OrderPayments_new;
 select distinct order_id from OrderReviewRatings_new;
 
-select * from Orders;
 
-
-
-select sum(Total_Amount) from Orders_new;
-
+select * from Orders_new;
+select * from Customer_new;
+select * from OrderReviewRatings_new;
+select * from OrderPayments_new;
+select * from StoresInfo_new;
+select * from ProductsInfo_new;
+select * from Orders360;
+select * from Customer360;
+select * from Stores360;
 
 
